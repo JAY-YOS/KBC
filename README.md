@@ -1,7 +1,13 @@
 # 🎬 Kaun Banega Crorepati — The Game
 
 A fully functional **KBC (Kaun Banega Crorepati)** trivia game built entirely in **C** as a CGI application, with server-side rendered HTML templates. No frameworks, no databases — just raw C powering a beautiful web-based quiz game.
+---
 
+👥 Team Information
+
+- **Jai Singh Rathore** (Team Lead) — University Roll: 2592593
+- **Jahnvi Agarwal** — University Roll: 2592592
+- **Mihika Negi** — University Roll: 0000000
 ---
 
 ## ✨ Features
