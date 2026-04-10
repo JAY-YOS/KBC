@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{TITLE}}</title>
+    <style>
+        :root {
+            --bg-color: #050510;
+            --accent-gold: #f0c040;
+            --btn-bg: #111144;
+            --btn-border: #3333aa;
+            --text-light: #ececec;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; background: radial-gradient(circle, #111133, var(--bg-color)); color: var(--text-light); margin: 0; min-height: 100vh; overflow-x: hidden; }
+        .box { background: rgba(10,10,30,0.85); padding: 40px; border: 2px solid var(--accent-gold); border-radius: 12px; max-width: 500px; margin: 50px auto; text-align: center; }
+        .btn { background: linear-gradient(to bottom, #44a, #115); border: 2px solid var(--accent-gold); color: var(--accent-gold); padding: 12px 30px; font-size: 1.2em; border-radius: 25px; cursor: pointer; text-transform: uppercase; margin: 10px; }
+        .btn:hover { background: #55b; }
+        .btn-red { background: #511; border-color: #aa3333; color: #ff9999; }
+        .btn-green { background: #152; border-color: #4a5; color: #fff; }
+        input[type=text] { padding: 10px; width: 80%; background: #000; color: #fff; border: 1px solid var(--btn-border); margin-bottom: 20px; font-size: 1.2em; }
+        
+        .topbar { display: flex; justify-content: space-between; padding: 15px 30px; background: #0a0a1e; border-bottom: 1px solid var(--accent-gold); align-items:center; }
+        .gold { color: var(--accent-gold); font-weight: bold; }
+        .main { display: flex; height: calc(100vh - 60px); }
+        .left { flex: 70%; display: flex; flex-direction: column; justify-content: flex-start; padding: 40px; }
+        .right { flex: 30%; background: rgba(0,0,0,0.5); border-left: 2px solid var(--accent-gold); padding: 20px; display: flex; flex-direction: column-reverse; overflow-y: auto; }
+        
+        .q-box { background: var(--btn-bg); border: 2px solid #ddd; padding: 30px; font-size: 1.5em; text-align: center; border-radius: 50px; margin-bottom: 40px; box-shadow: inset 0 0 15px #000; }
+        .opt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .opt-btn { background: var(--btn-bg); border: 2px solid var(--btn-border); color: #fff; padding: 20px; font-size: 1.2em; border-radius: 30px; text-align: left; cursor: pointer; }
+        .opt-btn:hover:not(:disabled) { background: #1a1a66; }
+        .opt-letter { color: var(--accent-gold); font-weight: bold; margin-right: 15px; }
+        
+        .ladder-item { display: flex; justify-content: space-between; padding: 8px; color: #aaa; }
+        .ladder-item.passed { color: var(--accent-gold); }
+        .ladder-item.current { background: var(--accent-gold); color: #000; border-radius: 4px; font-weight: bold; }
+        .ladder-item.safe { color: #fff; }
+        
+        .ll-btn { background: var(--btn-bg); border: 2px solid var(--accent-gold); color: var(--accent-gold); border-radius: 50%; width: 45px; height: 45px; font-size: 1.2em; cursor: pointer; display: flex; align-items:center; justify-content:center; }
+        .ll-btn:disabled { border-color: #555; color: #555; cursor: not-allowed; }
+        .hidden-opt { visibility: hidden; }
+        
+        .poll-container { display: flex; justify-content: space-evenly; align-items: flex-end; height: 100px; margin-top: 10px; margin-bottom: 30px; border-bottom: 1px solid #555; padding-bottom: 15px; }
+        .poll-bar { background: linear-gradient(to top, #15c, #49f); border-radius: 3px 3px 0 0; width: 30px; margin-top:5px; }
+        .correct { background: #1a5e20 !important; border-color: #4caf50 !important; }
+        .wrong { background: #801313 !important; border-color: #f44336 !important; }
+    </style>
+</head>
+<body>
+    {{MAIN_CONTENT}}
+</body>
+</html>
+
+<!-- TEMPLATES_BELOW -->
+<!-- SECTION: START -->
+    <style>
+        .start-full { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+            background: linear-gradient(to bottom, #020914, #081a3f);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-family: 'Times New Roman', Times, serif; text-align: center; color: #ececec; z-index: 1000;
+        }
+        .start-hero {
+            color: #f7d273; letter-spacing: 3px; font-size: 2em; margin-bottom: 10px; font-weight: bold; line-height: 1.3;
+        }
+        .start-subhero {
+            color: #aa863c; letter-spacing: 1px; font-size: 1em; margin-bottom: 30px; text-transform: uppercase;
+        }
+        .start-card {
+            background-color: #03153b;
+            border: 1px solid #5a4b27;
+            border-radius: 20px; padding: 40px 30px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            width: 90%; max-width: 400px; box-sizing: border-box;
+        }
+        .start-card h2 { color: #f7d273; font-size: 2.2em; margin-top: 0; margin-bottom: 15px;}
+        .start-card p { font-size: 1.1em; line-height: 1.5; margin-bottom: 30px; font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; color: #d0d0f0; }
+        
+        .start-input {
+            width: 100%; padding: 15px; font-size: 1.1em; background: rgba(0,0,0,0.3); border: 1px solid #5a4b27; 
+            color: #fff; border-radius: 10px; text-align: center; margin-bottom: 25px; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;
+        }
+        .start-input:focus { outline: none; border-color: #f7d273; }
+        
+        .start-btn {
+            background: linear-gradient(to right, #b58000, #ffe259, #b58000);
+            color: #000; font-weight: bold; font-size: 1.1em; letter-spacing: 1px;
+            border: none; border-radius: 50px; padding: 15px 10px; width: 100%; cursor: pointer;
+            box-shadow: 0 0 25px 5px rgba(254, 212, 84, 0.4); font-family: 'Times New Roman', serif;
+            transition: transform 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .start-btn:hover { transform: scale(1.05); }
+        .start-footer { margin-top: 25px; font-size: 0.8em; color: #5a6b8c; font-family: 'Segoe UI', sans-serif; line-height: 1.4; }
+    </style>
+
+    <div class="start-full">
+        <div class="start-hero">KAUN BANEGA<br>CROREPATI</div>
+        <div class="start-subhero">Are you ready to play?</div>
+        
+        <div class="start-card">
+            <h2>Welcome!</h2>
+            <p>Test your knowledge and win<br>up to &#8377;1 Crore!<br>You have 3 lifelines to help you.</p>
+            <form method="POST" action="/cgi-bin/kbc.cgi" style="margin:0;">
+                <input type="hidden" name="action" value="fetch_question">
+                {{HIDDEN_STATE}}
+                <input type="text" name="player_name" class="start-input" placeholder="Enter your name" required>
+                <button type="submit" class="start-btn">&#127916; START GAME</button>
+            </form>
+            <div class="start-footer">Questions powered by The Trivia API</div>
+        </div>
+    </div>
+<!-- END_SECTION: START -->
+
+<!-- SECTION: FETCH -->
+    <div style="display:flex; justify-content:center; align-items:center; height:100vh;">
+        <div class="box" style="border:none; box-shadow:none; background:transparent;">
+            <h2 class="gold">Connecting to Question Database...</h2>
+            <form id="fetchForm" method="POST" action="/cgi-bin/kbc.cgi">
+                <input type="hidden" name="action" value="show_question">
+                {{HIDDEN_STATE}}
+            </form>
+            <script>
+                function decode(h) { let t = document.createElement('textarea'); t.innerHTML = h; return t.value; }
+                let diffParam = '{{DIFF}}' === 'easy' ? 'easy' : '{{DIFF}}' === 'medium' ? 'medium' : 'hard';
+                let rnd = Math.random();
+                let tagMix = rnd < 0.33 ? 'computing,technology' : rnd < 0.66 ? 'sport' : 'science';
+                let url = 'https://the-trivia-api.com/v2/questions?limit=1&difficulties=' + diffParam + '&tags=' + tagMix;
+                fetch(url).then(r=>r.json()).then(d=>{
+                    let res = d[0];
+                    let opts = [...res.incorrectAnswers];
+                    let cIdx = Math.floor(Math.random()*4);
+                    opts.splice(cIdx, 0, res.correctAnswer);
+                    document.querySelector('[name=q_text]').value = decode(res.question.text);
+                    document.querySelector('[name=opt_a]').value = decode(opts[0]);
+                    document.querySelector('[name=opt_b]').value = decode(opts[1]);
+                    document.querySelector('[name=opt_c]').value = decode(opts[2]);
+                    document.querySelector('[name=opt_d]').value = decode(opts[3]);
+                    document.querySelector('[name=correct]').value = ['A','B','C','D'][cIdx];
+                    document.querySelector('[name=explain]').value = 'Trivia: ' + decode(res.correctAnswer);
+                    document.getElementById('fetchForm').submit();
+                }).catch(e=>{ alert('API fetch failed. Refresh the page.'); });
+            </script>
+        </div>
+    </div>
+<!-- END_SECTION: FETCH -->
+
+<!-- SECTION: BOARD -->
+    <div class="topbar">
+        <div style="font-size:1.2em">Player: <span class="gold">{{NAME}}</span> &nbsp;|&nbsp; Won: <span class="gold">&#8377;{{WINNINGS}}</span></div>
+        <form method="POST" action="/cgi-bin/kbc.cgi" style="margin:0; display:flex; gap:10px;">
+            <input type="hidden" name="action" value="lifeline">
+            {{HIDDEN_STATE}}
+            <button class="ll-btn" type="submit" name="lifeline" value="50" {{D_50}}>&#189;</button>
+            <button class="ll-btn" type="submit" name="lifeline" value="aud" {{D_AUD}}>&#128101;</button>
+            <button class="ll-btn" type="submit" name="lifeline" value="flip" {{D_FLIP}}>&#128259;</button>
+        </form>
+    </div>
+
+    <div class="main">
+        <div class="left">
+            <div class="q-box">{{Q_TEXT}}</div>
+            {{AUDIENCE_POLL}}
+            <form method="POST" action="/cgi-bin/kbc.cgi" class="opt-grid">
+                <input type="hidden" name="action" value="answer">
+                {{HIDDEN_STATE}}
+                <button type="submit" name="chosen" value="A" class="opt-btn {{HIDE_A}}"><span class="opt-letter">A:</span> {{A_TEXT}}</button>
+                <button type="submit" name="chosen" value="B" class="opt-btn {{HIDE_B}}"><span class="opt-letter">B:</span> {{B_TEXT}}</button>
+                <button type="submit" name="chosen" value="C" class="opt-btn {{HIDE_C}}"><span class="opt-letter">C:</span> {{C_TEXT}}</button>
+                <button type="submit" name="chosen" value="D" class="opt-btn {{HIDE_D}}"><span class="opt-letter">D:</span> {{D_TEXT}}</button>
+                <div style="grid-column: span 2; text-align:center; margin-top:30px;">
+                    <button type="submit" name="action" value="quit" class="btn btn-red">QUIT NOW (Keep &#8377;{{WINNINGS}})</button>
+                </div>
+            </form>
+        </div>
+        <div class="right">
+            {{LADDER}}
+        </div>
+    </div>
+<!-- END_SECTION: BOARD -->
+
+<!-- SECTION: RESULT -->
+    <div class="box" style="max-width: 600px;">
+        {{RESULT_HEADER}}
+        <p style="font-size:1.2em; color:#ddd;">{{EXPLAIN}}</p>
+        
+        <form method="POST" action="/cgi-bin/kbc.cgi">
+            {{HIDDEN_STATE_NEXT}}
+            {{NEXT_BUTTONS}}
+        </form>
+    </div>
+<!-- END_SECTION: RESULT -->
